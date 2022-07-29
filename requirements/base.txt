@@ -3,4 +3,7 @@ Django==3.2.4
 psycopg2-binary==2.9.1
 python-decouple==3.4
 pytz==2021.1
-
+djangorestframework-simplejwt
+PyJWT
+djangorestframework
+djoser

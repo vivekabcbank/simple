@@ -1,5 +1,5 @@
 from pathlib import Path
-
+import datetime
 import dj_database_url
 from decouple import Csv, config
 
@@ -23,8 +23,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
     "simple.apps.accounts",
     "simple.apps.core",
+
+    "drf_yasg",
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -163,3 +166,47 @@ MEDIA_ROOT = BASE_DIR.parent.parent / "media"
 # ==============================================================================
 
 SIMPLE_ENVIRONMENT = config("SIMPLE_ENVIRONMENT", default="local")
+
+
+# ==============================================================================
+# SWAGGER SETTINGS
+# ==============================================================================
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Auth Token eg [Bearer (JWT)]': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+        }
+    },
+    'SUPPORTED_SUBMIT_METHODS': ['get', 'post', 'put', 'delete', 'patch'],
+}
+
+
+# ==============================================================================
+# JWT SETTINGS
+# ==============================================================================
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
+    'BLACKLIST_AFTER_ROTATION': False,
+}
+
+
+# ==============================================================================
+# JWT SETTINGS
+# ==============================================================================
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        # 'rest_framework.renderers.BrowsableAPIRenderer',
+        # 'rest_framework_csv.renderers.CSVRenderer',
+    ),
+    "NON_FIELD_ERRORS_KEY":"error",
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
