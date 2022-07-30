@@ -4,7 +4,7 @@ from django.urls import path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-import debug_toolbar
+from .settings import base
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -22,8 +22,11 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('__debug__/', include(debug_toolbar.urls)),
     path('', schema_view.with_ui('swagger', cache_timeout=None), name='schema-swagger-ui'),
     path('^redoc', schema_view.with_ui('redoc', cache_timeout=None), name='schema-redoc'),
     path('auth/', include('djoser.urls.jwt')),
 ]
+
+if base.DEBUG:
+    import debug_toolbar
+    urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
