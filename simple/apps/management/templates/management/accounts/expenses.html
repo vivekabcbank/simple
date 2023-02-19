@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main-block %}
+<div class="content container-fluid">
+
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Expenses</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a
+                            href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Expenses</li>
+                </ul>
+            </div>
+            <div class="col-auto text-right float-right
+                ml-auto">
+                <a href="#" class="btn btn-outline-primary
+                    mr-2"><i class="fas fa-download"></i>
+                    Download</a>
+                <a href="{% url 'management:add-expenses' %}" class="btn
+                    btn-primary"><i class="fas fa-plus"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-table">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-center mb-0
+                            datatable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Item Name</th>
+                                    <th>Item Quality</th>
+                                    <th>Amount</th>
+                                    <th>Purchase Source</th>
+                                    <th>Purchase Date</th>
+                                    <th>Purchase By</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in expenses %}
+                                <tr>
+                                    <td>PRE2209</td>
+                                    <td>
+                                        <h2>
+                                            <a>Chair</a>
+                                        </h2>
+                                    </td>
+                                    <td>6</td>
+                                    <td>$120</td>
+                                    <td>Abc Shop</td>
+                                    <td>17 Aug 2020</td>
+                                    <td>Lois</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer-block %}
+{% include "footer.html" %}
+{% endblock %}

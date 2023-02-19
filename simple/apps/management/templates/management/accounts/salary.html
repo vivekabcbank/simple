@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main-block %}
+<div class="content container-fluid">
+
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Salary</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Salary</li>
+                </ul>
+            </div>
+            <div class="col-auto text-right float-right ml-auto">
+                <a href="#" class="btn btn-outline-primary mr-2"><i class="fas
+                        fa-download"></i> Download</a>
+                <a href="{% url 'management:add-salary' %}" class="btn btn-primary"><i class="fas
+                        fa-plus"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-table">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-center mb-0
+                            datatable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Gender</th>
+                                    <th>Joining Date</th>
+                                    <th>Amount</th>
+                                    <th class="text-right">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in salary %}
+                                <tr>
+                                    <td>PRE2209</td>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            <a class="avatar avatar-sm mr-2"><img
+                                                    class="avatar-img
+                                                    rounded-circle"
+                                                    src="{% static 'assets/img/profiles/avatar-01.jpg' %}"
+                                                    alt="User Image"></a>
+                                            <a>Aaliyah</a>
+                                        </h2>
+                                    </td>
+                                    <td>Female</td>
+                                    <td>17 Aug 2020</td>
+                                    <td>$320</td>
+                                    <td class="text-right">
+                                        <span class="badge badge-success">Paid</span>
+                                    </td>
+                                </tr>
+                                {% endfor %}                              
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer-block %}
+{% include "footer.html" %}
+{% endblock %}

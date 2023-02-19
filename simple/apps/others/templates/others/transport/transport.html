@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main-block %}
+<div class="content container-fluid">
+
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Transport</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Transport</li>
+                </ul>
+            </div>
+            <div class="col-auto text-right float-right ml-auto">
+                <a href="#" class="btn btn-outline-primary mr-2"><i class="fas
+                        fa-download"></i> Download</a>
+                <a href="{% url 'others:add-transport' %}" class="btn btn-primary"><i
+                        class="fas fa-plus"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-table">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-center mb-0
+                            datatable">
+                            <thead>
+                                <tr>
+                                    <th>Route Name</th>
+                                    <th>Vehicle Number</th>
+                                    <th>Driver Name</th>
+                                    <th>Driver License</th>
+                                    <th>Contact Number</th>
+                                    <th>Driver Address</th>
+                                    <th class="text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in transport %}
+                                <tr>
+                                    <td>New Cross</td>
+                                    <td>TN 43 AS 5263</td>
+                                    <td>Steve</td>
+                                    <td>REDH968532</td>
+                                    <td>+91 8974158962</td>
+                                    <td>152, South Pole, 2nd Street, 3rd Cross</td>
+                                    <td class="text-right">
+                                        <div class="actions">
+                                            <a href="{% url 'others:edit-transport' %}"
+                                                class="btn btn-sm
+                                                bg-success-light mr-2">
+                                                <i class="fas fa-pen"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-sm
+                                                bg-danger-light">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>                   
+                                {% endfor %}       
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer-block %}
+{% include "footer.html" %}
+{% endblock %}
