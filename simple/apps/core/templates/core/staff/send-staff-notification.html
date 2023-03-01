@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main-block %}
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row align-items-center">
+          <div class="col">
+             <h3 class="page-title">Send Staff Notification</h3>
+             <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'core:admin-dashboard' %}">Dashboard</a></li>
+                <li class="breadcrumb-item active">Send Staff Notification</li>
+             </ul>
+          </div>
+          <div class="col-auto text-right float-right ml-auto">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewnotificationmodal">
+                View all notifications
+              </button>
+          </div>
+       </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-table">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="table_id" class="table table-hover table-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th class="text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in staffs %}
+                                <tr>
+                                    <td>{{i.id}}</td>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            {% if i.admin.profile_pic %}
+                                            <a href="#"
+                                                class="avatar avatar-sm mr-2"><img
+                                                    class="avatar-img
+                                                    rounded-circle"                                                    
+                                                    src= "{{ i.admin.profile_pic.url }}"
+                                                    alt="User Image"></a>
+                                            {% else %}
+                                            <a href="#"
+                                            class="avatar avatar-sm mr-2"><img
+                                                class="avatar-img
+                                                rounded-circle"                                                    
+                                                src= "{% static 'assets/img/profiles/placeholder_img.png' %}"
+                                                alt="User Image"></a>
+                                            <a href="#">
+                                            {% endif %}
+                                            {{i.admin.username}}</a>
+                                        </h2>
+                                    </td>
+                                    <td>{{i.admin.email}}</td>
+                                    <td class="text-right">
+                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sendnotificationmodal-{{forloop.counter}}">Send Notification</button>
+                                    </td>
+                                </tr>     
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+ 
+ <!-- Modal -->
+<div class="modal fade" id="viewnotificationmodal" tabindex="-1" role="dialog" aria-labelledby="#viewnotificationmodal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewnotificationmodal">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="table-responsive">
+                <table id="table_id" class="table table-hover table-center mb-0">
+                    <thead>
+                        <tr>
+                            <th style="width:60%" class="text-center">Message</th>
+                            <th style="width:60%" class="text-center">Status</th>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in messages %}
+                        <tr>
+                            <td class="text-center">{{i.message}}</td>
+                            {% if i.status == 1 %}
+                            <td class="text-center"><span class="badge badge-success">Read</span></td>
+                            {% else %}
+                            <td class="text-center"><span class="badge badge-danger">Unread</span></td>
+                            {% endif %}                            
+                        </tr>     
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   <!-- Modal -->
+   {%  for i in staffs %}
+<div class="modal fade" id="sendnotificationmodal-{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="#sendnotificationmodal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="sendnotificationmodal">Send Staff Notification To {{i.admin.username}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form method="POST", action="{% url 'core:staff-save-notification' id=i.id %}">
+                {% csrf_token %}
+                <div class="form-group">
+                  <input type="text" class="form-control" name="notification-message">
+                </div>
+                <button type="submit" class="btn btn-primary">Send Notification</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+{% endblock %}
+
+{% block footer-block %}
+{% include "footer.html" %}
+{% endblock %}

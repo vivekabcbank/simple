@@ -4,7 +4,7 @@ import dj_database_url
 from decouple import Csv, config
 import os
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+from django.contrib.messages import constants as messages
 
 # ==============================================================================
 # CORE SETTINGS
@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "simple.apps.others",
 
     "drf_yasg",
+    "active_link",
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -81,14 +82,20 @@ TEMPLATES = [
 # ==============================================================================
 DATABASES={}
 if DEBUG:
+    # DATABASES = {
+    #     'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'incomeexpensesdb',
+    #     'USER': 'postgres',
+    #     'PASSWORD': '12345',
+    #     'HOST': 'localhost',
+    #     'PORT': '',
+    #     }
+    # }
     DATABASES = {
         'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'incomeexpensesdb',
-        'USER': 'postgres',
-        'PASSWORD': '12345',
-        'HOST': 'localhost',
-        'PORT': '',
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 else:
@@ -223,5 +230,18 @@ REST_FRAMEWORK = {
 
 # LOGIN_REDIRECT_URL = "/profile/" => url
 # LOGOUT_REDIRECT_URL = "/"
-# AUTH_USER_MODEL = 'common.Users'
+AUTH_USER_MODEL = 'core.User'
 # AUTHENTICATION_BACKENDS = ["common.authsetup.UserAuthentication"]
+
+
+# ==============================================================================
+# MESSAGES
+# ==============================================================================
+
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }

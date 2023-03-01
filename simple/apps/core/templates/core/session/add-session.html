@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main-block %}
+<div class="content container-fluid">
+
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Add Session</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'core:session-list' %}">Session</a></li>
+                    <li class="breadcrumb-item active">Add Session</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    {% if session %}
+                    <form method="POST" action="{% url 'core:update-session' id=session.id %}">
+                    {% else %}
+                    <form method="POST"">
+                    {% endif %}
+                    {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="form-title"><span>Session Information</span></h5>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                   <label>Start Date</label>
+                                   <div>
+                                      <input type="date" class="form-control" required name="session_year_start"  value="{{session.session_start}}">
+                                   </div>
+                                </div>
+                             </div>
+                             <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                   <label>End Date</label>
+                                   <div>
+                                      <input type="date" class="form-control"  required name="session_year_end"  value="{{session.session_end}}">
+                                   </div>
+                                </div>
+                             </div>                     
+                            <div class="col-12">
+                                {% if session %}
+                                <button type="submit" class="btn btn-primary">Update Session</button>
+                                {% else %}
+                                <button type="submit" class="btn btn-primary">Add Session</button>
+                                {% endif %}                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer-block %}
+{% include "footer.html" %}
+{% endblock %}

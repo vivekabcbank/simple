@@ -19,31 +19,61 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    {% if subject %}
+                    <form method="POST" action="{% url 'core:update-subject' id=subject.id %}">
+                    {% else %}
+                    <form method="POST"">
+                    {% endif %}
+                    {% csrf_token %}
                         <div class="row">
                             <div class="col-12">
                                 <h5 class="form-title"><span>Subject Information</span></h5>
                             </div>
                             <div class="col-12 col-sm-6">
                                 <div class="form-group">
-                                    <label>Subject ID</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
                                     <label>Subject Name</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" required name="subject_name" value={{subject.name}}>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
                                 <div class="form-group">
-                                    <label>Class</label>
-                                    <input type="text" class="form-control">
+                                    <label>Course</label>
+                                    <select class="form-control" name="course_id"
+                                    required value="{{subject.course_id}}">
+                                    <option>Select Course</option>
+                                    {% for i in courses %}      
+                                    {% if i == subject.course_id %}
+                                    <option value="{{i.id}}" selected="selected">
+                                    {% else %}
+                                    <option value="{{i.id}}">                                        
+                                    {% endif %}
+                                    {{i.name}}
+                                    </option>
+                                    {% endfor %}
+                                 </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Staff</label>
+                                   <select class="form-control" name="staff_id"
+                                      required value="{{subject.staff_id}}">
+                                      <option>Select Staff</option>
+                                      {% for i in staffs %}       
+                                      <option value="{{i.id}}" {% if i == subject.staff_id %}selected="selected"{% endif %}>
+                                        {{i.admin.username}}
+                                      </option>
+                                      {% endfor %}
+                                   </select>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                {% if subject %}
+                                <button type="submit" class="btn btn-primary">Update</button>
+                                {% else %}
+                                <button type="submit" class="btn btn-primary">Add</button>
+                                {% endif %}                                
                             </div>
                         </div>
                     </form>

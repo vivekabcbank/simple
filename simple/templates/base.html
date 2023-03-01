@@ -46,6 +46,15 @@
         <script src="{% static 'assets/js/circle-progress.min.js' %}"></script>
         <script src="{% static 'assets/js/script.js' %}"></script>
         <script src="{% static 'assets/plugins/datatables/datatables.min.js' %}"></script>
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="{% static 'assets/plugins/datatables/datatables.min.js'%}"></script>
+        <script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+        {% include "include/chart.html" %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#table_id').dataTable();
+    });
+</script>
     </body>
 
 </html>

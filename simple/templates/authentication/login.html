@@ -14,15 +14,17 @@
                     <div class="login-right-wrap">
                         <h1>Login</h1>
                         <p class="account-subtitle">Access to our dashboard</p>
+                        {% include 'messages.html' %}
                         <form
-                            action="https://preschool.dreamguystech.com/html-template/index.html">
+                            action="" method="POST">
+                            {% csrf_token %}
                             <div class="form-group">
                                 <input class="form-control" type="text"
-                                    placeholder="Email">
+                                    placeholder="User Name" name="username">
                             </div>
                             <div class="form-group">
-                                <input class="form-control" type="text"
-                                    placeholder="Password">
+                                <input class="form-control" type="password"
+                                    placeholder="Password" name="password">
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary btn-block"

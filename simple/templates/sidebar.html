@@ -1,158 +1,270 @@
+{% load active_link_tags %}
+
 <div class="sidebar" id="sidebar">
-    <div class="sidebar-inner slimscroll">
-       <div id="sidebar-menu" class="sidebar-menu">
-          <ul>
-             <li class="menu-title">
-                <span>Main Menu</span>
-             </li>
-             <li class="submenu active">
-                <a href="#"><i class="fas fa-user-graduate"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
-                <ul>
-                   <li><a href="/" class="active">Admin Dashboard</a></li>
-                   <li><a href="{% url 'core:teacher-dashboard' %}">Teacher Dashboard</a></li>
-                   <li><a href="/student/dashboard/">Student Dashboard</a></li>
-                </ul>
-             </li>
-             <li class="submenu">
-                <a href="#"><i class="fas fa-user-graduate"></i> <span> Students</span> <span class="menu-arrow"></span></a>
-                <ul>
-                   <li><a href="{% url 'core:student-list' %}">Student List</a></li>
-                   <li><a href="{% url 'core:student-details' %}">Student View</a></li>
-                   <li><a href="{% url 'core:add-student' %}">Student Add</a></li>
-                   <li><a href="{% url 'core:edit-student' %}">Student Edit</a></li>
-                </ul>
-             </li>
-             <li class="submenu">
-                <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Teachers</span> <span class="menu-arrow"></span></a>
-                <ul>
-                   <li><a href="{% url 'core:teacher-list' %}">Teacher List</a></li>
-                   <li><a href="{% url 'core:teacher-details' %}">Teacher View</a></li>
-                   <li><a href="{% url 'core:add-teacher' %}">Teacher Add</a></li>
-                   <li><a href="{% url 'core:edit-teacher' %}">Teacher Edit</a></li>
-                </ul>
-             </li>
-             <li class="submenu">
-                <a href="#"><i class="fas fa-building"></i> <span> Departments</span> <span class="menu-arrow"></span></a>
-                <ul>
-                   <li><a href="{% url 'core:department-list' %}">Department List</a></li>
-                   <li><a href="{% url 'core:add-department' %}">Department Add</a></li>
-                   <li><a href="{% url 'core:edit-teacher' %}">Department Edit</a></li>
-                </ul>
-             </li>
-             <li class="submenu">
-                <a href="#"><i class="fas fa-book-reader"></i> <span> Subjects</span> <span class="menu-arrow"></span></a>
-                <ul>
-                   <li><a href="{% url 'core:subject-list' %}">Subject List</a></li>
-                   <li><a href="{% url 'core:add-subject' %}">Subject Add</a></li>
-                   <li><a href="{% url 'core:edit-subject' %}">Subject Edit</a></li>
-                </ul>
-             </li>
-             <li class="menu-title">
-                <span>Management</span>
-             </li>
-             <li class="submenu">
-                <a href="#"><i class="fas fa-file-invoice-dollar"></i> <span> Accounts</span> <span class="menu-arrow"></span></a>
-                <ul>
-                   <li><a href="{% url 'management:fees-collections' %}">Fees Collection</a></li>
-                   <li><a href="{% url 'management:expenses' %}">Expenses</a></li>
-                   <li><a href="{% url 'management:salary' %}">Salary</a></li>
-                   <li><a href="{% url 'management:add-fees-collection' %}">Add Fees</a></li>
-                   <li><a href="{% url 'management:add-expenses' %}">Add Expenses</a></li>
-                   <li><a href="{% url 'management:add-salary' %}">Add Salary</a></li>
-                </ul>
-             </li>
-             <li>
-                <a href="{% url 'management:holiday' %}"><i class="fas fa-holly-berry"></i> <span>Holiday</span></a>
-             </li>
-             <li>
-                <a href="{% url 'management:fees' %}"><i class="fas fa-comment-dollar"></i> <span>Fees</span></a>
-             </li>
-             <li>
-                <a href="{% url 'management:exam' %}"><i class="fas fa-clipboard-list"></i> <span>Exam list</span></a>
-             </li>
-             <li>
-                <a href="{% url 'management:event' %}"><i class="fas fa-calendar-day"></i> <span>Events</span></a>
-             </li>
-             <li>
-                <a href="{% url 'management:time-table' %}"><i class="fas fa-table"></i> <span>Time Table</span></a>
-             </li>
-             <li>
-                <a href="{% url 'management:library' %}"><i class="fas fa-book"></i> <span>Library</span></a>
-             </li>
-             <li class="menu-title">
-                <span>Pages</span>
-             </li>
-             <li class="submenu">
-                <a href="#"><i class="fas fa-shield-alt"></i> <span> Authentication </span> <span class="menu-arrow"></span></a>
-                <ul>
-                   <li><a href="{% url 'core:account-login' %}">Login</a></li>
-                   <li><a href="{% url 'core:account-register' %}">Register</a></li>
-                   <li><a href="{% url 'core:account-forgot-password' %}">Forgot Password</a></li>
-                   <li><a href="{% url 'core:error-404' %}">Error Page</a></li>
-                </ul>
-             </li>
-             <li>
-                <a href="{% url 'core:blank-page' %}"><i class="fas fa-file"></i> <span>Blank Page</span></a>
-             </li>
-             <li class="menu-title">
-                <span>Others</span>
-             </li>
-             <li>
-                <a href="{% url 'others:sports' %}"><i class="fas fa-baseball-ball"></i> <span>Sports</span></a>
-             </li>
-             <li>
-                <a href="{% url 'others:hostel' %}"><i class="fas fa-hotel"></i> <span>Hostel</span></a>
-             </li>
-             <li>
-                <a href="{% url 'others:transport' %}"><i class="fas fa-bus"></i> <span>Transport</span></a>
-             </li>
-             <li class="menu-title">
-                <span>UI Interface</span>
-             </li>
-             <li>
-                <a href="components.html"><i class="fas fa-vector-square"></i> <span>Components</span></a>
-             </li>
-             <li class="submenu">
-                <a href="#"><i class="fas fa-columns"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
-                <ul>
-                   <li><a href="form-basic-inputs.html">Basic Inputs </a></li>
-                   <li><a href="form-input-groups.html">Input Groups </a></li>
-                   <li><a href="form-horizontal.html">Horizontal Form </a></li>
-                   <li><a href="form-vertical.html"> Vertical Form </a></li>
-                   <li><a href="form-mask.html"> Form Mask </a></li>
-                   <li><a href="form-validation.html"> Form Validation </a></li>
-                </ul>
-             </li>
-             <li class="submenu">
-                <a href="#"><i class="fas fa-table"></i> <span> Tables </span> <span class="menu-arrow"></span></a>
-                <ul>
-                   <li><a href="tables-basic.html">Basic Tables </a></li>
-                   <li><a href="data-tables.html">Data Table </a></li>
-                </ul>
-             </li>
-             <li class="submenu">
-                <a href="javascript:void(0);"><i class="fas fa-code"></i> <span>Multi Level</span> <span class="menu-arrow"></span></a>
-                <ul>
-                   <li class="submenu">
-                      <a href="javascript:void(0);"> <span>Level 1</span> <span class="menu-arrow"></span></a>
-                      <ul>
-                         <li><a href="javascript:void(0);"><span>Level 2</span></a></li>
-                         <li class="submenu">
-                            <a href="javascript:void(0);"> <span> Level 2</span> <span class="menu-arrow"></span></a>
-                            <ul>
-                               <li><a href="javascript:void(0);">Level 3</a></li>
-                               <li><a href="javascript:void(0);">Level 3</a></li>
-                            </ul>
-                         </li>
-                         <li><a href="javascript:void(0);"> <span>Level 2</span></a></li>
-                      </ul>
-                   </li>
-                   <li>
-                      <a href="javascript:void(0);"> <span>Level 1</span></a>
-                   </li>
-                </ul>
-             </li>
-          </ul>
-       </div>
-    </div>
- </div>
+   <div class="sidebar-inner slimscroll">
+      <div id="sidebar-menu" class="sidebar-menu">
+         {% if request.user.user_type == "1" %}
+         <ul>
+            <li class="menu-title">
+               <span>Main Menu</span>
+            </li>
+            <li class="submenu {% active_link 'core:admin-dashboard' 'active' %}
+               {% active_link 'core:staff-dashboard' 'active' %} {% active_link
+               '/student/dashboard/' 'active' %}">
+               <a href="{% url 'core:admin-dashboard' %}"><i class="fas
+                     fa-user-graduate"></i> <span>Dashboard</span></a>
+            </li>
+            <li class="submenu {% active_link 'core:student-list' 'active' %} {%
+               active_link 'core:add-student' 'active' %}">
+               <a href="#"><i class="fas fa-user-graduate"></i> <span> Students</span>
+                  <span class="menu-arrow"></span></a>
+               <ul>
+                  <li><a href="{% url 'core:student-list' %}">View Student</a></li>
+                  <li><a href="{% url 'core:add-student' %}">Add Student</a></li>
+               </ul>
+            </li>
+            <li class="submenu {% active_link 'core:staff-list' 'active' %} {%
+               active_link 'core:add-staff' 'active' %}">
+               <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span>Staff</span>
+                  <span class="menu-arrow"></span></a>
+               <ul>
+                  <li><a href="{% url 'core:staff-list' %}">View Staff</a></li>
+                  <li><a href="{% url 'core:add-staff' %}">Add Staff</a></li>
+               </ul>
+            </li>
+            <li class="submenu {% active_link 'core:course-list' 'active' %} {%
+               active_link 'core:add-course' 'active' %}">
+               <a href="#"><i class="fas fa-user-graduate"></i> <span> Course</span>
+                  <span class="menu-arrow"></span></a>
+               <ul>
+                  <li><a href="{% url 'core:course-list' %}">Course List</a></li>
+                  <li><a href="{% url 'core:add-course' %}">Add Course</a></li>
+               </ul>
+            </li>
+            <li class="submenu {% active_link 'core:subject-list' 'active' %} {%
+               active_link 'core:add-subject' 'active' %}">
+               <a href="#"><i class="fas fa-book-reader"></i> <span> Subjects</span>
+                  <span class="menu-arrow"></span></a>
+               <ul>
+                  <li><a href="{% url 'core:subject-list' %}">View Subject</a></li>
+                  <li><a href="{% url 'core:add-subject' %}">Add Subject</a></li>
+               </ul>
+            </li>
+            <li class="submenu {% active_link 'core:session-list' 'active' %} {%
+               active_link 'core:add-session' 'active' %}">
+               <a href="#"><i class="fas fa-clock"></i> <span> Session</span>
+                  <span class="menu-arrow"></span></a>
+               <ul>
+                  <li><a href="{% url 'core:session-list' %}">View Session</a></li>
+                  <li><a href="{% url 'core:add-session' %}">Add Session</a></li>
+               </ul>
+            </li>
+            <li class="{% active_link 'core:staff-send-notification' 'active' %}">
+               <a href="{% url 'core:staff-send-notification' %}"><i class="fas fa-solid fa-bell"></i> <span>Send Staff
+                     Notification</span></a>
+            </li>
+            <li class="{% active_link 'core:student-send-notification' 'active' %}">
+               <a href="{% url 'core:student-send-notification' %}"><i class="fas fa-solid fa-bell"></i> <span>Send Student Notification</span></a>
+            </li>
+            <li class="{% active_link 'core:staff-view-attendence' 'active' %}">
+               <a href="{% url 'core:staff-view-attendence' %}"><i class="fas fa-calendar"></i> <span>View Attendence</span></a>
+            </li>
+            <li class="{% active_link 'core:staff-feedbacck-view' 'active' %}">
+               <a href="{% url 'core:staff-feedbacck-view' %}"><i class="fas fa-comments"></i> <span>Staff Feedback</span></a>
+            </li>
+            <li class="{% active_link 'core:student-feedbacck-view' 'active' %}">
+               <a href="{% url 'core:student-feedbacck-view' %}"><i class="fas fa-comments"></i> <span>Student Feedback</span></a>
+            </li>
+            <li class="{% active_link 'core:staff-leave-view' 'active' %}">
+               <a href="{% url 'core:staff-leave-view' %}"><i class="fas fa-envelope"></i> <span>Staff Leave</span></a>
+            </li>
+            <li class="{% active_link 'core:student-leave-view' 'active' %}">
+               <a href="{% url 'core:student-leave-view' %}"><i class="fas fa-envelope"></i> <span>Student Leave</span></a>
+            </li>
+            <li>
+               <a href="{% url 'core:account-logout' %}"><i class="fas
+                     fa-sign-out-alt"></i> <span>Logout</span></a>
+            </li>
+            <li class="menu-title">
+               <span>Management</span>
+            </li>
+            <li class="submenu">
+               <a href="#"><i class="fas fa-file-invoice-dollar"></i> <span>
+                     Accounts</span> <span class="menu-arrow"></span></a>
+               <ul>
+                  <li><a href="{% url 'management:fees-collections' %}">Fees
+                        Collection</a></li>
+                  <li><a href="{% url 'management:expenses' %}">Expenses</a></li>
+                  <li><a href="{% url 'management:salary' %}">Salary</a></li>
+                  <li><a href="{% url 'management:add-fees-collection' %}">Add
+                        Fees</a></li>
+                  <li><a href="{% url 'management:add-expenses' %}">Add Expenses</a></li>
+                  <li><a href="{% url 'management:add-salary' %}">Add Salary</a></li>
+               </ul>
+            </li>
+            <li>
+               <a href="{% url 'management:holiday' %}"><i class="fas
+                     fa-holly-berry"></i> <span>Holiday</span></a>
+            </li>
+            <li>
+               <a href="{% url 'management:fees' %}"><i class="fas
+                     fa-comment-dollar"></i> <span>Fees</span></a>
+            </li>
+            <li>
+               <a href="{% url 'management:exam' %}"><i class="fas
+                     fa-clipboard-list"></i> <span>Exam list</span></a>
+            </li>
+            <li>
+               <a href="{% url 'management:event' %}"><i class="fas
+                     fa-calendar-day"></i> <span>Events</span></a>
+            </li>
+            <li>
+               <a href="{% url 'management:time-table' %}"><i class="fas
+                     fa-table"></i> <span>Time Table</span></a>
+            </li>
+            <li>
+               <a href="{% url 'management:library' %}"><i class="fas fa-book"></i>
+                  <span>Library</span></a>
+            </li>
+            <li class="menu-title">
+               <span>Pages</span>
+            </li>
+            <li class="submenu">
+               <a href="#"><i class="fas fa-shield-alt"></i> <span>
+                     Authentication </span> <span class="menu-arrow"></span></a>
+               <ul>
+                  <li><a href="{% url 'core:account-login' %}">Login</a></li>
+                  <li><a href="{% url 'core:account-register' %}">Register</a></li>
+                  <li><a href="{% url 'core:account-forgot-password' %}">Forgot
+                        Password</a></li>
+                  <li><a href="{% url 'core:error-404' %}">Error Page</a></li>
+               </ul>
+            </li>
+            <li>
+               <a href="{% url 'core:blank-page' %}"><i class="fas fa-file"></i>
+                  <span>Blank Page</span></a>
+            </li>
+            <li class="menu-title">
+               <span>Others</span>
+            </li>
+            <li>
+               <a href="{% url 'others:sports' %}"><i class="fas
+                     fa-baseball-ball"></i> <span>Sports</span></a>
+            </li>
+            <li>
+               <a href="{% url 'others:hostel' %}"><i class="fas fa-hotel"></i>
+                  <span>Hostel</span></a>
+            </li>
+            <li>
+               <a href="{% url 'others:transport' %}"><i class="fas fa-bus"></i>
+                  <span>Transport</span></a>
+            </li>
+            <li class="menu-title">
+               <span>UI Interface</span>
+            </li>
+            <li>
+               <a href="components.html"><i class="fas fa-vector-square"></i>
+                  <span>Components</span></a>
+            </li>
+            <li class="submenu">
+               <a href="#"><i class="fas fa-columns"></i> <span> Forms </span>
+                  <span class="menu-arrow"></span></a>
+               <ul>
+                  <li><a href="form-basic-inputs.html">Basic Inputs </a></li>
+                  <li><a href="form-input-groups.html">Input Groups </a></li>
+                  <li><a href="form-horizontal.html">Horizontal Form </a></li>
+                  <li><a href="form-vertical.html"> Vertical Form </a></li>
+                  <li><a href="form-mask.html"> Form Mask </a></li>
+                  <li><a href="form-validation.html"> Form Validation </a></li>
+               </ul>
+            </li>
+            <li class="submenu">
+               <a href="#"><i class="fas fa-table"></i> <span> Tables </span>
+                  <span class="menu-arrow"></span></a>
+               <ul>
+                  <li><a href="tables-basic.html">Basic Tables </a></li>
+                  <li><a href="data-tables.html">Data Table </a></li>
+               </ul>
+            </li>
+            <li class="submenu">
+               <a href="javascript:void(0);"><i class="fas fa-code"></i> <span>Multi
+                     Level</span> <span class="menu-arrow"></span></a>
+               <ul>
+                  <li class="submenu">
+                     <a href="javascript:void(0);"> <span>Level 1</span> <span
+                           class="menu-arrow"></span></a>
+                     <ul>
+                        <li><a href="javascript:void(0);"><span>Level 2</span></a></li>
+                        <li class="submenu">
+                           <a href="javascript:void(0);"> <span> Level 2</span>
+                              <span class="menu-arrow"></span></a>
+                           <ul>
+                              <li><a href="javascript:void(0);">Level 3</a></li>
+                              <li><a href="javascript:void(0);">Level 3</a></li>
+                           </ul>
+                        </li>
+                        <li><a href="javascript:void(0);"> <span>Level 2</span></a></li>
+                     </ul>
+                  </li>
+                  <li>
+                     <a href="javascript:void(0);"> <span>Level 1</span></a>
+                  </li>
+               </ul>
+            </li>
+         </ul>
+         {% elif request.user.user_type == "2" %}
+         <ul>
+            <li class="{% active_link 'core:staff-dashboard' 'active' %}">
+               <a href="{% url 'core:staff-dashboard' %}"><i class="fas fa-user-graduate"></i> <span>Dashboard</span></a>               
+            </li>            
+            <li class="{% active_link 'core:staff-take-attendence' 'active' %}">
+               <a href="{% url 'core:staff-take-attendence' %}"><i class="fas fa-calendar"></i> <span>Take Attendence</span></a>               
+            </li>           
+            <li class="{% active_link 'core:staff-view-attendence' 'active' %}">
+               <a href="{% url 'core:staff-view-attendence' %}"><i class="fas fa-calendar"></i> <span>View/Update Attendence</span></a>               
+            </li>            
+            <li class="{% active_link 'core:staff-add-result' 'active' %}">
+               <a href="{% url 'core:staff-add-result' %}"><i class="fas fa-list-alt"></i> <span>Add Result</span></a>               
+            </li>            
+            <li class="{% active_link 'core:staff-apply-leave' 'active' %}">
+               <a href="{% url 'core:staff-apply-leave' %}"><i class="fas fa-envelope"></i> <span>Apply For Leave</span></a>               
+            </li>
+            <li class="{% active_link 'core:staff-feedbacck' 'active' %}">
+               <a href="{% url 'core:staff-feedbacck' %}"><i class="fas fa-envelope"></i> <span>Send Feedback</span></a>               
+            </li>            
+            <li>
+               <a href="#"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>               
+            </li>   
+            <li class="{% active_link 'core:staff-get-notification' 'active' %}">
+               <a href="{% url 'core:staff-get-notification' id=request.user.id %}"><i class="fas fa-solid fa-bell"></i> <span>Notifications</span></a>
+            </li>         
+         </ul>
+         {% elif request.user.user_type == "3" %}
+         <ul>
+            <li>
+               <a href="/student/dashboard/"><i class="fas fa-user-graduate"></i><span>Dashboard</span></a>
+            </li>            
+            <li class="{% active_link 'core:student-view-attendence' 'active' %}">
+               <a href="{% url 'core:student-view-attendence' %}"><i class="fas fa-calendar"></i><span>View Attendence</span></a>
+            </li>
+            <li class="{% active_link 'core:student-view-result' 'active' %}">
+               <a href="{% url 'core:student-view-result' %}"><i class="fas fa-list-alt"></i><span>View Result</span></a>
+            </li>
+            <li class="{% active_link 'core:student-apply-leave' 'active' %}">
+               <a href="{% url 'core:student-apply-leave' %}"><i class="fas fa-envelope"></i><span>Apply for Leave</span></a>
+            </li>
+            <li class="{% active_link 'core:student-feedbacck' 'active' %}">
+               <a href="{% url 'core:student-feedbacck' %}"><i class="fas fa-comments"></i><span>Send feedback</span></a>
+            </li>
+         
+            <li class="{% active_link 'core:student-get-notification' 'active' %}">
+               <a href="{% url 'core:student-get-notification' %}"><i class="fas fa-solid fa-bell"></i><span>Notifications</span></a>
+            </li>
+            <li>
+               <a href="{% url 'core:account-logout' %}"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+            </li>
+         </ul>
+         {% endif %}
+      </div>
+   </div>
+</div>

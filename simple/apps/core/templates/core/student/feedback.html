@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main-block %}
+<div class="content container-fluid">
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Feedback</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Feedback</li>
+                </ul>
+            </div>
+            <div class="col-auto text-right float-right ml-auto">
+                <button" type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModalLong"">Feedback History</a>
+            </div>
+        </div>
+    </div>
+{% include 'messages.html' %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Send feedback</span></h5>
+                        </div>
+                        <div class="col-sm-11">
+                            <div class="form-group">
+                                <label>Feedback</label>
+                                <textarea class="form-control" name="feedback" style="height:200px" required></textarea>
+                            </div>
+                        </div>                        
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Send feedback</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Feedback history</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-center mb-0">
+                    <thead>
+                        <tr>
+                            <th style="width:60%" class="text-center">ID</th>
+                            <th style="width:60%" class="text-center">Feedback</th>
+                            <th style="width:60%" class="text-center">Replay</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in feedbacks %}
+                        <tr>
+                            <td class="text-center">{{i.id}}</td>
+                            <td class="text-center">{{i.feedback}}</td>    
+                            {% if i.feedback_reply == "" %}
+                            <td><span class="badge badge-danger" disabled>No Replay</span></td>                            
+                            {% else %}
+                            <td>{{i.feedback_reply}}</td>                            
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block footer-block %}
+{% include "footer.html" %}
+{% endblock %}

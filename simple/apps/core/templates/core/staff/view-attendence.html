@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main-block %}
+<div class="content container-fluid">
+
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">View Attendence</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Attendence</a></li>
+                    <li class="breadcrumb-item active">View Attendence</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% if action is None %}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" action="?action=view_attendence">
+                {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>View Attendence</span></h5>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Subject</label>
+                                <select class="form-control" name="subject_id" required>
+                                <option>Select Subject</option>
+                                {% for i in subjects %}   
+                                <option value="{{i.id}}">                                        
+                                {{i.name}}
+                                </option>
+                                {% endfor %}
+                             </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Session</label>
+                               <select class="form-control" name="session_id" required>
+                                  <option>Select Session</option>
+                                  {% for i in sessions %}       
+                                  <option value="{{i.id}}"> 
+                                    {{i.session_start}}-{{i.session_end}} 
+                                  </option>
+                                  {% endfor %}
+                               </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Attendence Date</label>
+                                <input type="date" class="form-control" required name="attendence_date">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Show Students</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="row">
+    <div class="col-12">
+        <h5 class="form-title"><span>View Attendence</span></h5>
+    </div>
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label>Subject</label>
+            <select class="form-control" disabled>
+            <option value="{{subject.id}}">{{subject.name}}</option>
+         </select>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label>Session</label>
+           <select class="form-control" disabled>            
+              <option value="{{session.id}}"> {{session}} </option>
+           </select>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label>Attendence Date</label>
+            <input type="date" class="form-control" value="{{attendence_date}}" disabled>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="table_id" class="table table-hover table-center mb-0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for stud in students %}
+                            {% with i=stud.student_id %}
+                            <tr>
+                                <td>{{i.id}}</td>
+                                <td>{{i.admin.username}}</td>                                
+                                <td>{{i.admin.email}}</td>                                
+                            </tr>     
+                            {% endwith %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}    
+</div>
+{% endblock %}
+
+{% block footer-block %}
+{% include "footer.html" %}
+{% endblock %}

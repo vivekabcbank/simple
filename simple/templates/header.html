@@ -1,12 +1,28 @@
 {% load static %}
 <div class="header">
     <div class="header-left">
-       <a href="/" class="logo">
-       <img src="{% static 'assets/img/logo.png' %}" alt="Logo">
-       </a>
-       <a href="/" class="logo logo-small">
-       <img src="{% static 'assets/img/logo-small.png' %}" alt="Logo" width="30" height="30">
-       </a>
+      {% if request.user.user_type == "1" %}
+      <a href="{% url 'core:admin-dashboard' %}" class="logo">
+         <img src="{% static 'assets/img/logo.png' %}" alt="Logo">
+         </a>
+         <a href="{% url 'core:admin-dashboard' %}" class="logo logo-small">
+            <img src="{% static 'assets/img/logo-small.png' %}" alt="Logo" width="30" height="30">
+            </a>
+      {% elif request.user.user_type == "2" %}
+      <a href="{% url 'core:staff-dashboard' %}" class="logo">
+         <img src="{% static 'assets/img/logo.png' %}" alt="Logo">
+         </a>
+         <a href="{% url 'core:staff-dashboard' %}" class="logo logo-small">
+            <img src="{% static 'assets/img/logo-small.png' %}" alt="Logo" width="30" height="30">
+            </a>
+      {% elif request.user.user_type == "3" %}                  
+      <a href="/student/dashboard/" class="logo">
+         <img src="{% static 'assets/img/logo.png' %}" alt="Logo">
+         </a>
+         <a href="/student/dashboard/" class="logo logo-small">
+            <img src="{% static 'assets/img/logo-small.png' %}" alt="Logo" width="30" height="30">
+            </a>
+      {% endif %}       
     </div>
     <a href="javascript:void(0);" id="toggle_btn">
     <i class="fas fa-align-left"></i>
@@ -92,22 +108,30 @@
           </div>
        </li>
        <li class="nav-item dropdown has-arrow">
-          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-          <span class="user-img"><img class="rounded-circle" src="{% static 'assets/img/profiles/avatar-01.jpg' %}" width="31" alt="Ryan Taylor"></span>
+         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+         {% if request.user.profile_pic %}
+         <span class="user-img"><img class="rounded-circle" src="{{ request.user.profile_pic.url }}" width="31" alt="Ryan Taylor"></span>
+         {% else %}
+         <span class="user-img"><img class="rounded-circle" src="{% static 'assets/img/profiles/placeholder_img.png' %}" width="31" alt="Ryan Taylor"></span>
+         {% endif %}           
           </a>
           <div class="dropdown-menu">
              <div class="user-header">
                 <div class="avatar avatar-sm">
-                   <img src="{% static 'assets/img/profiles/avatar-01.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
+                  {% if request.user.profile_pic %}
+                  <img src="{{ request.user.profile_pic.url }}" alt="User Image" class="avatar-img rounded-circle">
+                  {% else %}
+                  <img src="{% static 'assets/img/profiles/placeholder_img.png' %}" alt="User Image" class="avatar-img rounded-circle">
+                  {% endif %}                   
                 </div>
                 <div class="user-text">
-                   <h6>Ryan Taylor</h6>
-                   <p class="text-muted mb-0">Administrator</p>
+                   <h6>{{ request.user.username }}</h6>
+                   <p class="text-muted mb-0">{{ request.user.get_user_type_display }}</p>
                 </div>
              </div>
-             <a class="dropdown-item" href="profile.html">My Profile</a>
+             <a class="dropdown-item" href="{% url 'core:profile' %}">My Profile</a>
              <a class="dropdown-item" href="inbox.html">Inbox</a>
-             <a class="dropdown-item" href="{% url 'core:account-login' %}">Logout</a>
+             <a class="dropdown-item" href="{% url 'core:account-logout' %}">Logout</a>
           </div>
        </li>
     </ul>

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main-block %}
+<div class="content container-fluid">
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Students</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Students</li>
+                </ul>
+            </div>
+            <div class="col-auto text-right float-right ml-auto">
+                <button" type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModalLong""> Leave Apply History</a>
+            </div>
+        </div>
+    </div>
+{% include 'messages.html' %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Apply for leave</span></h5>
+                        </div>
+                        <div class="col-sm-11">
+                            <div class="form-group">
+                                <label>Leave Date</label>
+                                <input type="date" class="form-control" name="leave_date">
+                            </div>
+                            <div class="form-group">
+                                <label>Leave Reason</label>
+                                <textarea class="form-control" name="reason" style="height:200px" required></textarea>
+                            </div>
+                        </div>                        
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Apply for leave</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-center mb-0">
+                    <thead>
+                        <tr>
+                            <th style="width:60%" class="text-center">Date</th>
+                            <th style="width:60%" class="text-center">Reason</th>
+                            <th style="width:60%" class="text-center">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in leaves %}
+                        <tr>
+                            <td class="text-center">{{i.date}}</td>
+                            <td class="text-center">{{i.message}}</td>                            
+                            <td class="text-right">
+                                <div class="actions">
+                                    {% if i.status == 0 %}
+                                    <button class="badge badge-info" disabled>Pending</button>
+                                    {% elif i.status == 1 %}
+                                    <button class="badge badge-success" disabled>Approved</button>
+                                    {% else %}
+                                    <button class="badge badge-danger" disabled>Disapproved</button>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>     
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block footer-block %}
+{% include "footer.html" %}
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main-block %}
+<div class="content container-fluid">
+
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Take Attendence</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Attendence</a></li>
+                    <li class="breadcrumb-item active">Take Attendence</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    {% if action is None %}
+                    <form method="POST" action="?action=get_student">
+                    {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="form-title"><span>Take Attendence</span></h5>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Subject</label>
+                                    <select class="form-control" name="subject_id" required>
+                                    <option>Select Subject</option>
+                                    {% for i in subjects %}   
+                                    <option value="{{i.id}}">                                        
+                                    {{i.name}}
+                                    </option>
+                                    {% endfor %}
+                                 </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Session</label>
+                                   <select class="form-control" name="session_id" required>
+                                      <option>Select Session</option>
+                                      {% for i in sessions %}       
+                                      <option value="{{i.id}}"> 
+                                        {{i.session_start}}-{{i.session_end}} 
+                                      </option>
+                                      {% endfor %}
+                                   </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Fetch Student</button>
+                            </div>
+                        </div>
+                    </form>
+                    {% else %}
+                    <form method="POST" action="{% url 'core:staff-save-attendence' %}">
+                        {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="form-title"><span>Take Attendence</span></h5>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Subject</label>
+                                       <select class="form-control" name="subject_id" required value="{{subject}}">
+                                          <option>Session Subject</option>
+                                          <option value="{{subject.id}}" selected="selected">
+                                            {{subject}}
+                                       </select>
+                                    </div>
+                                </div>
+    
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Session</label>
+                                       <select class="form-control" name="session_id" required value="{{session}}">
+                                          <option>Session Year</option>
+                                          <option value="{{session.id}}" selected="selected">
+                                            {{session}}
+                                       </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Attendence Date</label>
+                                        <input type="date" class="form-control" required name="attendence_date">
+                                    </div>
+                                </div>
+                                {% for i in students %}
+                                <div class="col-12 mt-4 mt-4">
+                                    <div class="form-group form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" value="{{i.id}}" name="student_ids">
+                                        <label class="form-check-label" for="exampleCheck1">{{i}}</label>
+                                    </div>
+                                </div>                                
+                                {% endfor %}                                
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer-block %}
+{% include "footer.html" %}
+{% endblock %}

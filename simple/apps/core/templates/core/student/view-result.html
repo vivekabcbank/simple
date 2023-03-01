@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main-block %}
+<div class="content container-fluid">
+
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">View Attendence</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Attendence</a></li>
+                    <li class="breadcrumb-item active">View Attendence</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-12">
+        <h5 class="form-title"><span>View Attendence</span></h5>
+    </div>
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="table_id" class="table table-hover table-center mb-0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Subject</th>
+                                <th>Assignment Mark</th>
+                                <th>Exam Mark</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in results %}                            
+                            <tr>
+                                <td>{{i.id}}</td>
+                                <td>{{i.subject_id.name}}</td>
+                                <td>{{i.assignment_mark}}</td>
+                                <td>{{i.exam_mark}}</td>
+                                {% if i.getResult == "Pass" %}
+                                <td><span class="badge badge-success">{{i.getResult}}</span></td>
+                                {% else %}
+                                <td><span class="badge badge-danger">{{i.getResult}}</span></td>
+                                {% endif %}
+                            </tr>                                 
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+{% block footer-block %}
+{% include "footer.html" %}
+{% endblock %}
